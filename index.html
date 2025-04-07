@@ -35,6 +35,12 @@
       padding: 0 20px;
     }
     
+    /* Special override for home section container only */
+    #home .container {
+      max-width: 100%;
+      padding: 0;
+    }
+    
     section {
       padding: 60px 0;
     }
@@ -79,6 +85,78 @@
       box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     }
     
+    /* Mobile Menu Styles */
+    .mobile-menu-btn {
+      display: none;
+      flex-direction: column;
+      justify-content: space-between;
+      width: 30px;
+      height: 21px;
+      cursor: pointer;
+      z-index: 1001;
+    }
+    
+    .mobile-menu-btn .bar {
+      height: 3px;
+      width: 100%;
+      background-color: white;
+      border-radius: 10px;
+      transition: all 0.3s ease;
+    }
+    
+    .mobile-menu {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: #0078BF;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transform: translateY(-100%);
+      transition: transform 0.3s ease;
+      z-index: 1000;
+    }
+    
+    .mobile-menu.active {
+      transform: translateY(0);
+    }
+    
+    .mobile-menu ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      text-align: center;
+    }
+    
+    .mobile-menu li {
+      margin: 20px 0;
+    }
+    
+    .mobile-menu a {
+      color: white;
+      font-size: 1.2rem;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+    
+    .mobile-menu a:hover {
+      color: #00843D;
+    }
+    
+    .mobile-menu-btn.active .bar:nth-child(1) {
+      transform: translateY(9px) rotate(45deg);
+    }
+    
+    .mobile-menu-btn.active .bar:nth-child(2) {
+      opacity: 0;
+    }
+    
+    .mobile-menu-btn.active .bar:nth-child(3) {
+      transform: translateY(-9px) rotate(-45deg);
+    }
+    
     nav {
       display: flex;
       justify-content: space-between;
@@ -109,51 +187,133 @@
       text-decoration: none;
     }
     
-    /* Hero Section */
+    /* Slideshow Styles */
     #home {
       height: 100vh;
+      width: 100%;
+      padding: 0;
+      margin: 0;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .slideshow-container {
+      height: 100%;
+      width: 100vw;
+      margin: 0;
+      padding: 0;
+      position: relative;
+    }
+    
+    .slide {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      opacity: 0;
+      transition: opacity 1s ease-in-out;
+      background-size: cover;
+      background-position: center;
+    }
+    
+    .slide.active {
+      opacity: 1;
+    }
+    
+    .slide-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.4);
       display: flex;
+      flex-direction: column;
+      justify-content: center;
       align-items: center;
-      padding-top: 80px;
-      background: linear-gradient(135deg, #0078BF, #00843D);
       color: white;
-    }
-    
-    .hero-content {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 60px; /* Adds spacing between text and image */
-    }
-    
-    .hero-text {
-      flex: 1;
-    }
-    
-    .hero-text h1 {
-      font-size: 3rem;
-      margin-bottom: 20px;
-      color: white;
-      white-space: nowrap; /* Prevents text from wrapping */
-    }
-    
-    .hero-text p {
-      font-size: 1.2rem;
-      margin-bottom: 30px;
-      white-space: nowrap; /* Prevents text from wrapping */
-    }
-    
-    .hero-image {
-      flex: 1;
       text-align: center;
     }
     
-    .hero-image img {
-      width: 300px;
-      height: 300px;
+    .slide-content h1 {
+      font-size: 3.5rem;
+      color: white;
+      margin-bottom: 20px;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    }
+    
+    .slide-content p {
+      font-size: 1.5rem;
+      margin-bottom: 30px;
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+    }
+    
+    .slide-nav {
+      position: absolute;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 10px;
+    }
+    
+    .slide-dot {
+      width: 12px;
+      height: 12px;
       border-radius: 50%;
-      border: 8px solid rgba(255, 255, 255, 0.2);
-      object-fit: cover;
+      border: 2px solid white;
+      background: transparent;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    
+    .slide-dot.active {
+      background: white;
+      transform: scale(1.2);
+    }
+    
+    .slide-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 50px;
+      height: 50px;
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      z-index: 10;
+    }
+    
+    .slide-arrow:hover {
+      background: rgba(255, 255, 255, 0.4);
+    }
+    
+    .slide-arrow.prev {
+      left: 20px;
+    }
+    
+    .slide-arrow.next {
+      right: 20px;
+    }
+    
+    .arrow-icon {
+      border: solid white;
+      border-width: 0 3px 3px 0;
+      display: inline-block;
+      padding: 6px;
+    }
+    
+    .arrow-right {
+      transform: rotate(-45deg);
+    }
+    
+    .arrow-left {
+      transform: rotate(135deg);
     }
     
     .btn {
@@ -594,28 +754,26 @@
     
     /* Responsive Design */
     @media screen and (max-width: 992px) {
-      .hero-content {
-        flex-direction: column;
-        text-align: center;
-      }
-      
-      .hero-text {
-        margin-bottom: 40px;
-      }
-      
-      /* Adjust font sizes for smaller screens */
-      .hero-text h1 {
+      .slide-content h1 {
         font-size: 2.5rem;
       }
       
-      .hero-text p {
-        font-size: 1rem;
+      .slide-content p {
+        font-size: 1.2rem;
+      }
+      
+      .projects-grid {
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
       }
     }
     
     @media screen and (max-width: 768px) {
       .nav-links {
         display: none;
+      }
+      
+      .mobile-menu-btn {
+        display: flex;
       }
       
       .timeline-container::after {
@@ -647,26 +805,97 @@
       .right {
         left: 0;
       }
+      
+      /* Improved mobile styles */
+      section {
+        padding: 40px 0;
+      }
+      
+      h2 {
+        font-size: 1.7rem;
+      }
+      
+      .container {
+        padding: 0 15px;
+      }
+      
+      .education-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .slide-arrow {
+        width: 40px;
+        height: 40px;
+      }
+      
+      .slide-arrow.prev {
+        left: 10px;
+      }
+      
+      .slide-arrow.next {
+        right: 10px;
+      }
+      
+      .social-links {
+        gap: 15px;
+      }
+      
+      .social-links a {
+        width: 35px;
+        height: 35px;
+        line-height: 35px;
+        font-size: 18px;
+      }
     }
     
     /* Additional responsive adjustment for very small screens */
     @media screen and (max-width: 480px) {
-      .hero-text h1 {
+      .slide-content h1 {
         font-size: 2rem;
       }
       
-      .hero-text p {
+      .slide-content p {
         font-size: 0.9rem;
+      }
+      
+      h1 {
+        font-size: 2rem;
+      }
+      
+      h2 {
+        font-size: 1.5rem;
+      }
+      
+      .btn {
+        padding: 10px 20px;
+        font-size: 0.9rem;
+      }
+      
+      .project-card {
+        padding: 15px;
+      }
+      
+      .project-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 5px;
+      }
+      
+      .back-to-top {
+        width: 40px;
+        height: 40px;
+        font-size: 20px;
+        right: 15px;
+        bottom: 15px;
       }
     }
   </style>
 </head>
 <body>
-  <!-- Header / Navigation -->
   <header>
     <div class="container">
       <nav>
-        <div class="logo">Sandeep</div>
+        <div class="logo">Sandeep Singh</div>
         <ul class="nav-links">
           <li><a href="#home">Home</a></li>
           <li><a href="#about">About me</a></li>
@@ -674,23 +903,46 @@
           <li><a href="#timeline">Publications</a></li>
           <li><a href="#me">Contact me</a></li>
         </ul>
+        <div class="mobile-menu-btn">
+          <div class="bar"></div>
+          <div class="bar"></div>
+          <div class="bar"></div>
+        </div>
       </nav>
+      <div class="mobile-menu">
+        <ul>
+          <li><a href="#home">Home</a></li>
+          <li><a href="#about">About me</a></li>
+          <li><a href="#skills">Projects</a></li>
+          <li><a href="#timeline">Publications</a></li>
+          <li><a href="#me">Contact me</a></li>
+        </ul>
+      </div>
     </div>
   </header>
   
-  <!-- Hero Section -->
+  <!-- Hero Section with Slideshow -->
   <section id="home">
-    <div class="container">
-      <div class="hero-content">
-        <div class="hero-text">
+    <div class="slideshow-container">
+      <!-- Slides will be dynamically generated by JavaScript -->
+      <div class="slide-overlay">
+        <div class="slide-content">
           <h1>Sandeep Singh</h1>
           <p>Software Developer | Clinical Research | Machine learning & AI</p>
           <a href="#about" class="btn">Learn More</a>
         </div>
-        <div class="hero-image">
-          <img src="images/IMG_1311.PNG" alt="Sandeep Singh">
-        </div>
       </div>
+      
+      <!-- Slide Navigation Arrows -->
+      <div class="slide-arrow prev">
+        <i class="arrow-icon arrow-left"></i>
+      </div>
+      <div class="slide-arrow next">
+        <i class="arrow-icon arrow-right"></i>
+      </div>
+      
+      <!-- Slide Dots - will be dynamically generated -->
+      <div class="slide-nav"></div>
     </div>
   </section>
   
@@ -723,8 +975,6 @@
               <h4>Associate of Science</h4>
               <p>Kent State University, Kent, OH</p>
             </div>
-            
-
           </div>
         </div>
       </div>
@@ -820,176 +1070,289 @@
     </div>
   </section>
   
-
-  
-  <!-- Timeline Section -->
-  <section id="timeline">
-    <div class="container">
-      <h2>Publications Timeline</h2>
+ <!-- Timeline Section -->
+ <section id="timeline">
+  <div class="container">
+    <h2>Publications Timeline</h2>
+    <div class="timeline-container">
+      <div class="timeline-item left" data-category="publication">
+        <div class="timeline-content">
+          <div class="date">2025</div>
+          <span class="category publication">AAO Abstract</span>
+          <h3>Ocular Candidiasis Screening Using LLMs</h3>
+          <p>Antaki F, Arline AA, Bala S, Mohan N, Schulgit MJ, Bellanda VCF, Mahmoud M, <strong>Singh S</strong>, et al. Scalable and Automated Extraction of Clinical Features from Ocular Candidiasis Screening Consultations Using Large Language Models. <em>AAO 2025</em>. Abstract Id: 30082430.</p>
+          <a href="https://iovs.arvojournals.org/solr/searchresults.aspx?author=SANDEEP+SINGH" class="abstract-link" target="_blank">Read ASRS Abstract</a>
+        </div>
+      </div>
       
-      <div class="timeline-container">
-        <div class="timeline-item right" data-category="publication">
-          <div class="timeline-content">
-            <div class="date">2025</div>
-            <span class="category publication">ASRS Abstract</span>
-            <h3>Retinal Ischemic Perivascular Lesions Study</h3>
-            <p><strong>Delaney A, Singh S</strong>, et al. Screening for retinal ischemic perivascular lesions in patients undergoing cardiovascular assessment: A one-year outcome analysis. <em>ASRS 2025 43rd Annual Scientific Meeting</em>. Proposal.</p>
-          </div>
+      <div class="timeline-item right" data-category="publication">
+        <div class="timeline-content">
+          <div class="date">2024</div>
+          <span class="category publication">AAO Abstract</span>
+          <h3>OCT and OCT-A in Cardiovascular Studies</h3>
+          <p>Srivastava SK, Sharma S, Baynes KM, <strong>Singh S</strong>, et al. OCT and OCT-A of the Retina in Patients Undergoing Cardiovascular Studies: A Prospective Study. <em>AAO 2024</em>. Abstract 30079813.</p>
+          <a href="https://iovs.arvojournals.org/solr/searchresults.aspx?author=SANDEEP+SINGH" class="abstract-link" target="_blank">Read AAO Abstract</a>
         </div>
-        
-        <div class="timeline-item left" data-category="publication">
-          <div class="timeline-content">
-            <div class="date">2025</div>
-            <span class="category publication">ASRS Abstract</span>
-            <h3>OCT Angiography in Retinal Vasculitis</h3>
-            <p><strong>Mizuno Y, Singh S</strong>, et al. Optical coherence tomography angiography findings in retinal vasculitis. <em>ASRS 2025 43rd Annual Scientific Meeting</em>. Proposal.</p>
-          </div>
+      </div>
+      
+      <div class="timeline-item left" data-category="publication">
+        <div class="timeline-content">
+          <div class="date">2024</div>
+          <span class="category publication">ARVO Abstract</span>
+          <h3>Quantitative Anterior Chamber Cell Analysis</h3>
+          <p>Sharma S, Hamden A, Chen C, <strong>Singh S</strong>, et al. Longitudinal quantitative anterior chamber cell analysis following Vamikibart intravitreal therapy in patients with uveitic macular edema from the DOVETAIL clinical trial. <em>Invest Ophthalmol Vis Sci.</em> 2024;65(7):3028.</p>
+          <a href="https://iovs.arvojournals.org/solr/searchresults.aspx?author=SANDEEP+SINGH" class="abstract-link" target="_blank"> Read ARVO Abstract</a>
         </div>
-        
-        <div class="timeline-item right" data-category="publication">
-          <div class="timeline-content">
-            <div class="date">2024</div>
-            <span class="category publication">AAO Abstract</span>
-            <h3>OCT and OCT-A in Cardiovascular Studies</h3>
-            <p><strong>Srivastava SK, Sharma S, Baynes KM</strong>, et al. OCT and OCT-A of the Retina in Patients Undergoing Cardiovascular Studies: A Prospective Study. <em>AAO 2024</em>. Abstract 30079813.</p>
-          </div>
+      </div>
+      
+      <div class="timeline-item right" data-category="publication">
+        <div class="timeline-content">
+          <div class="date">2024</div>
+          <span class="category publication">ARVO Abstract</span>
+          <h3>Ultra-Widefield Fluorescein Angiography Study</h3>
+          <p><strong>Singh S</strong>, Sharma S, Baynes K, et al. Imaging characteristics and clinical utility of full-dose vs quarter-dose ultra-widefield fluorescein angiography. <em>Invest Ophthalmol Vis Sci.</em> 2024;65(7):5959.</p>
+          <a href="https://iovs.arvojournals.org/solr/searchresults.aspx?author=SANDEEP+SINGH" class="abstract-link" target="_blank">Read ARVO Abstract</a>
         </div>
-        
-        <div class="timeline-item left" data-category="publication">
-          <div class="timeline-content">
-            <div class="date">2024</div>
-            <span class="category publication">ARVO Abstract</span>
-            <h3>Quantitative Anterior Chamber Cell Analysis</h3>
-            <p><strong>Sharma S, Hamden A, Chen C, Singh S</strong>, et al. Longitudinal quantitative anterior chamber cell analysis following Vamikibart intravitreal therapy in patients with uveitic macular edema from the DOVETAIL clinical trial. <em>Invest Ophthalmol Vis Sci.</em> 2024;65(7):3028.</p>
-          </div>
+      </div>
+      
+      <div class="timeline-item left" data-category="publication">
+        <div class="timeline-content">
+          <div class="date">2024</div>
+          <span class="category publication">Journal Article</span>
+          <h3>Ultrawidefield Fundus Fluorescein Angiography</h3>
+          <p>Szigiato A, Sharma S, <strong>Singh S</strong>, et al. Imaging characteristics and clinical utility of half-dose versus full-dose ultrawidefield fundus fluorescein angiography. <em>Ophthalmol Retina.</em> 2024;8(10):981-986. doi:10.1016/j.oret.2024.04.024.</p>
+          <a href="https://iovs.arvojournals.org/solr/searchresults.aspx?author=SANDEEP+SINGH" class="abstract-link" target="_blank">Read Journal Article</a>
         </div>
-        
-        <div class="timeline-item right" data-category="publication">
-          <div class="timeline-content">
-            <div class="date">2024</div>
-            <span class="category publication">ARVO Abstract</span>
-            <h3>Ultra-Widefield Fluorescein Angiography Study</h3>
-            <p><strong>Singh S, Sharma S, Baynes K</strong>, et al. Imaging characteristics and clinical utility of full-dose vs quarter-dose ultra-widefield fluorescein angiography. <em>Invest Ophthalmol Vis Sci.</em> 2024;65(7):5959.</p>
-          </div>
+      </div>
+      
+      <div class="timeline-item right" data-category="publication">
+        <div class="timeline-content">
+          <div class="date">2023</div>
+          <span class="category publication">ARVO Abstract</span>
+          <h3>Remote Assessment with OCT</h3>
+          <p>Erwin C, Sharma S, McDonald MA, <strong>Singh S</strong>, et al. Remote assessment of patients with red eyes utilizing anterior segment optical coherence tomography – a pilot study. <em>Invest Ophthalmol Vis Sci.</em> 2023;64(8):3408.</p>
+          <a href="https://iovs.arvojournals.org/solr/searchresults.aspx?author=SANDEEP+SINGH" class="abstract-link" target="_blank">Read ARVO Abstract</a>
         </div>
-        
-        <div class="timeline-item left" data-category="publication">
-          <div class="timeline-content">
-            <div class="date">2024</div>
-            <span class="category publication">Journal Article</span>
-            <h3>Ultrawidefield Fundus Fluorescein Angiography</h3>
-            <p><strong>Szigiato A, Sharma S, Singh S</strong>, et al. Imaging characteristics and clinical utility of half-dose versus full-dose ultrawidefield fundus fluorescein angiography. <em>Ophthalmol Retina.</em> 2024;8(10):981-986. doi:10.1016/j.oret.2024.04.024.</p>
-          </div>
+      </div>
+      
+      <div class="timeline-item left" data-category="publication">
+        <div class="timeline-content">
+          <div class="date">2023</div>
+          <span class="category publication">ARVO Abstract</span>
+          <h3>Ultra-Widefield Fluorescein Angiography Comparison</h3>
+          <p>Szigiato A, <strong>Singh S</strong>, Mills M, et al. Imaging characteristics and clinical utility of half vs full dose ultra-widefield fluorescein angiography. <em>Invest Ophthalmol Vis Sci.</em> 2023;64(8):3730.</p>
+          <a href="https://iovs.arvojournals.org/solr/searchresults.aspx?author=SANDEEP+SINGH" class="abstract-link" target="_blank">Read ARVO Abstract</a>
         </div>
-        
-        <div class="timeline-item right" data-category="publication">
-          <div class="timeline-content">
-            <div class="date">2023</div>
-            <span class="category publication">ARVO Abstract</span>
-            <h3>Remote Assessment with OCT</h3>
-            <p><strong>Erwin C, Sharma S, McDonald MA, Singh S</strong>, et al. Remote assessment of patients with red eyes utilizing anterior segment optical coherence tomography – a pilot study. <em>Invest Ophthalmol Vis Sci.</em> 2023;64(8):3408.</p>
-          </div>
-        </div>
-        
-        <div class="timeline-item left" data-category="publication">
-          <div class="timeline-content">
-            <div class="date">2023</div>
-            <span class="category publication">ARVO Abstract</span>
-            <h3>Ultra-Widefield Fluorescein Angiography Comparison</h3>
-            <p><strong>Szigiato A, Singh S, Mills M</strong>, et al. Imaging characteristics and clinical utility of half vs full dose ultra-widefield fluorescein angiography. <em>Invest Ophthalmol Vis Sci.</em> 2023;64(8):3730.</p>
-          </div>
-        </div>
-        
-        <div class="timeline-item right" data-category="publication">
-          <div class="timeline-content">
-            <div class="date">2023</div>
-            <span class="category publication">ARVO Abstract</span>
-            <h3>Choroidal Vessel Thickness Study</h3>
-            <p><strong>Singh S, Mammo D, Baynes K</strong>, et al. The change in choroidal vessel thickness on ICG angiography in patients who underwent scleral windows for uveal effusion syndrome. <em>Invest Ophthalmol Vis Sci.</em> 2023;64(8):2084.</p>
-          </div>
+      </div>
+      
+      <div class="timeline-item right" data-category="publication">
+        <div class="timeline-content">
+          <div class="date">2023</div>
+          <span class="category publication">ARVO Abstract</span>
+          <h3>Choroidal Vessel Thickness Study</h3>
+          <p><strong>Singh S</strong>, Mammo D, Baynes K, et al. The change in choroidal vessel thickness on ICG angiography in patients who underwent scleral windows for uveal effusion syndrome. <em>Invest Ophthalmol Vis Sci.</em> 2023;64(8):2084.</p>
+          <a href="https://iovs.arvojournals.org/solr/searchresults.aspx?author=SANDEEP+SINGH" class="abstract-link" target="_blank">Read ARVO Abstract</a>
         </div>
       </div>
     </div>
-  </section>
-  
-  <!-- Footer -->
-  <footer id="me">
-    <div class="container">
-      <div class="contact-info">
-        <p>Cleveland, OH 44137</p>
-        <p>Cleveland Clinic</p>
-        <p>Contact me: singhs21@ccf.org</p>
-      </div>
-      <div class="social-links">
-        <a href="#"><i class="fab fa-linkedin-in"></i></a>
-        <a href="#"><i class="fab fa-github"></i></a>
-        <a href="#"><i class="fab fa-twitter"></i></a>
-      </div>
-      <div class="copyright">
-        <p>&copy; 2025 Sandeep Singh. All rights reserved.</p>
-      </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer id="me">
+  <div class="container">
+    <div class="contact-info">
+      <p>Cleveland, OH 44137</p>
+      <p>Contact me: Sandeepsinghs93097@gmail.com</p>
     </div>
-  </footer>
+    <div class="social-links">
+      <a href="#"><i class="fab fa-linkedin-in"></i></a>
+      <a href="#"><i class="fab fa-github"></i></a>
+      <a href="#"><i class="fab fa-twitter"></i></a>
+    </div>
+    <div class="copyright">
+      <p>&copy; 2025 Sandeep Singh. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<!-- Back to top button -->
+<div class="back-to-top">↑</div>
+
+<!-- Scripts -->
+<script>
+  // Images slideshow setup
+  const imageFolder = 'images/'; // Folder containing the images
+  const imageFiles = [
+    'image4.jpg',
+    'image2.jpg',
+    'image3.jpg',
+    'image5.jpg',
+  ]; // Replace with your actual image filenames
   
-  <!-- Back to top button -->
-  <div class="back-to-top">↑</div>
-  
-  <!-- Scripts -->
-  <script>
-    // Back to top button
-    const backToTopButton = document.querySelector('.back-to-top');
+  // Set up slideshow
+  const setupSlideshow = () => {
+    const slideshowContainer = document.querySelector('.slideshow-container');
+    const slideNav = document.querySelector('.slide-nav');
     
-    window.addEventListener('scroll', () => {
-      if (window.pageYOffset > 300) {
-        backToTopButton.classList.add('active');
-      } else {
-        backToTopButton.classList.remove('active');
-      }
+    // Create slides for each image
+    imageFiles.forEach((image, index) => {
+      const slide = document.createElement('div');
+      slide.className = `slide ${index === 0 ? 'active' : ''}`;
+      slide.style.backgroundImage = `url('${imageFolder}${image}')`;
+      slideshowContainer.prepend(slide);
+      
+      // Create nav dots
+      const dot = document.createElement('div');
+      dot.className = `slide-dot ${index === 0 ? 'active' : ''}`;
+      dot.setAttribute('data-index', index);
+      slideNav.appendChild(dot);
     });
     
-    backToTopButton.addEventListener('click', () => {
+    // Set up initial slide
+    showSlide(0);
+  };
+  
+  // Show a specific slide
+  const showSlide = (index) => {
+    const slides = document.querySelectorAll('.slide');
+    const dots = document.querySelectorAll('.slide-dot');
+    
+    // Hide all slides and remove active class from dots
+    slides.forEach(slide => slide.classList.remove('active'));
+    dots.forEach(dot => dot.classList.remove('active'));
+    
+    // Show active slide and dot
+    slides[index].classList.add('active');
+    dots[index].classList.add('active');
+  };
+  
+  // Slideshow next/prev functions
+  const nextSlide = () => {
+    const slides = document.querySelectorAll('.slide');
+    const currentIndex = Array.from(slides).findIndex(slide => slide.classList.contains('active'));
+    const newIndex = (currentIndex + 1) % slides.length;
+    showSlide(newIndex);
+  };
+  
+  const prevSlide = () => {
+    const slides = document.querySelectorAll('.slide');
+    const currentIndex = Array.from(slides).findIndex(slide => slide.classList.contains('active'));
+    const newIndex = (currentIndex - 1 + slides.length) % slides.length;
+    showSlide(newIndex);
+  };
+  
+  // Automatic slideshow timer
+  let slideshowTimer;
+  
+  const startSlideshow = () => {
+    slideshowTimer = setInterval(nextSlide, 5000); // Change slide every 5 seconds
+  };
+  
+  const pauseSlideshow = () => {
+    clearInterval(slideshowTimer);
+  };
+  
+  // Initialize slideshow on load
+  window.addEventListener('load', () => {
+    setupSlideshow();
+    startSlideshow();
+    
+    // Set up slideshow controls
+    document.querySelector('.slide-arrow.next').addEventListener('click', () => {
+      pauseSlideshow();
+      nextSlide();
+      startSlideshow();
+    });
+    
+    document.querySelector('.slide-arrow.prev').addEventListener('click', () => {
+      pauseSlideshow();
+      prevSlide();
+      startSlideshow();
+    });
+    
+    // Dot navigation
+    document.querySelector('.slide-nav').addEventListener('click', (e) => {
+      if (e.target.classList.contains('slide-dot')) {
+        pauseSlideshow();
+        const index = parseInt(e.target.getAttribute('data-index'));
+        showSlide(index);
+        startSlideshow();
+      }
+    });
+  });
+  
+  // Back to top button
+  const backToTopButton = document.querySelector('.back-to-top');
+  
+  window.addEventListener('scroll', () => {
+    if (window.pageYOffset > 300) {
+      backToTopButton.classList.add('active');
+    } else {
+      backToTopButton.classList.remove('active');
+    }
+  });
+  
+  backToTopButton.addEventListener('click', () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  });
+  
+  // Smooth scrolling for navigation links
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+      e.preventDefault();
+      
+      const targetId = this.getAttribute('href');
+      const targetElement = document.querySelector(targetId);
+      
       window.scrollTo({
-        top: 0,
+        top: targetElement.offsetTop - 80,
         behavior: 'smooth'
       });
     });
-    
-    // Smooth scrolling for navigation links
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', function(e) {
-        e.preventDefault();
-        
-        const targetId = this.getAttribute('href');
-        const targetElement = document.querySelector(targetId);
-        
-        window.scrollTo({
-          top: targetElement.offsetTop - 80,
-          behavior: 'smooth'
-        });
-      });
-    });
-    
-    // Timeline scroll animation
-    function checkVisible() {
-      const items = document.querySelectorAll('.timeline-item');
-      items.forEach(item => {
-        const rect = item.getBoundingClientRect();
-        const windowHeight = window.innerHeight || document.documentElement.clientHeight;
-        
-        if (rect.top <= windowHeight * 0.8) {
-          item.style.opacity = '1';
-        }
-      });
-    }
-    
-    // Check visible on load
-    window.addEventListener('load', checkVisible);
-    
-    // Check visible on scroll
-    window.addEventListener('scroll', checkVisible);
-  </script>
+  });
   
-  <!-- Font Awesome -->
-  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+  // Timeline scroll animation
+  function checkVisible() {
+    const items = document.querySelectorAll('.timeline-item');
+    items.forEach(item => {
+      const rect = item.getBoundingClientRect();
+      const windowHeight = window.innerHeight || document.documentElement.clientHeight;
+      
+      if (rect.top <= windowHeight * 0.8) {
+        item.style.opacity = '1';
+      }
+    });
+  }
+  
+  // Check visible on load
+  window.addEventListener('load', checkVisible);
+  
+  // Check visible on scroll
+  window.addEventListener('scroll', checkVisible);
+  
+  // Mobile Menu Functionality
+  const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+  const mobileMenu = document.querySelector('.mobile-menu');
+  
+  mobileMenuBtn.addEventListener('click', () => {
+    mobileMenuBtn.classList.toggle('active');
+    mobileMenu.classList.toggle('active');
+  });
+  
+  // Close mobile menu when a link is clicked
+  document.querySelectorAll('.mobile-menu a').forEach(link => {
+    link.addEventListener('click', () => {
+      mobileMenuBtn.classList.remove('active');
+      mobileMenu.classList.remove('active');
+    });
+  });
+</script>
+
+<!-- Font Awesome -->
+<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 </body>
 </html>
